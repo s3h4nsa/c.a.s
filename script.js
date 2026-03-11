@@ -106,20 +106,48 @@ statNums.forEach(el => counterObserver.observe(el));
 /* ── Contact Form ── */
 const form = document.getElementById('contactForm');
 const msg  = document.getElementById('msg');
+// paste your Formspree URL here (replace YOUR_FORM_ID with your actual form ID):
+const FORMSPREE_URL = 'https://formspree.io/f/YOUR_FORM_ID';
 
-form.addEventListener('submit', (e) => {
+form.addEventListener('submit', async function(e) {
   e.preventDefault();
+
   const btn = form.querySelector('button[type="submit"]');
   btn.disabled = true;
   btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Sending...';
-  setTimeout(() => {
-    msg.innerHTML = '<i class="fa-solid fa-check-circle"></i> Message sent! We\'ll be in touch within 24 hours.';
-    msg.style.color = '#4ade80';
+  msg.innerHTML = '';
+
+  const data = {
+    name:    document.getElementById('name').value,
+    company: document.getElementById('company').value,
+    email:   document.getElementById('email').value,
+    service: document.getElementById('service').value,
+    message: document.getElementById('message').value
+  };
+
+  try {
+    const response = await fetch(FORMSPREE_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify(data)
+    });
+    const result = await response.json();
+
+    if (response.ok) {
+      msg.innerHTML = '<i class="fa-solid fa-check-circle"></i> Message sent! We will be in touch within 24 hours.';
+      msg.style.color = '#4ade80';
+      form.reset();
+      setTimeout(function() { msg.innerHTML = ''; }, 6000);
+    } else {
+      throw new Error(result.error || 'Submission failed');
+    }
+  } catch (err) {
+    msg.innerHTML = '<i class="fa-solid fa-circle-exclamation"></i> Something went wrong. Please email us at info@cas.lk';
+    msg.style.color = '#f87171';
+  } finally {
     btn.disabled = false;
     btn.innerHTML = 'Send Message <i class="fa-solid fa-paper-plane"></i>';
-    form.reset();
-    setTimeout(() => { msg.innerHTML = ''; }, 6000);
-  }, 1400);
+  }
 });
 
 /* ── Parallax on Hero Orbs ── */
