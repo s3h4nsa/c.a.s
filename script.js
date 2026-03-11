@@ -107,7 +107,7 @@ statNums.forEach(el => counterObserver.observe(el));
 const form = document.getElementById('contactForm');
 const msg  = document.getElementById('msg');
 // paste your Formspree URL here (replace YOUR_FORM_ID with your actual form ID):
-const FORMSPREE_URL = 'https://formspree.io/f/YOUR_FORM_ID';
+const FORMSPREE_URL = 'https://formspree.io/f/xqeyqern';
 
 form.addEventListener('submit', async function(e) {
   e.preventDefault();
