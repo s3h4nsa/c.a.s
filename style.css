@@ -134,13 +134,27 @@ em { font-style: italic; color: var(--gold-2); }
   top: 0; left: 0; right: 0;
   z-index: 1000;
   padding: 0;
-  transition: background 0.4s ease, padding 0.4s ease, box-shadow 0.4s ease;
+  transition: box-shadow 0.4s ease;
+  /* NO backdrop-filter here — would trap fixed nav children in stacking context */
+}
+
+/* Blur lives on ::before so header never creates a stacking context */
+#header::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(10,15,30,0);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  transition: background 0.4s ease;
+  z-index: -1;
+}
+
+#header.scrolled::before {
+  background: rgba(10,15,30,0.95);
 }
 
 #header.scrolled {
-  background: rgba(10,15,30,0.95);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
   box-shadow: 0 1px 0 var(--border);
 }
 
@@ -1046,9 +1060,6 @@ textarea { resize: vertical; }
 }
 
 @media (max-width: 768px) {
-  body { cursor: auto; }
-  .cursor, .cursor-trail { display: none; }
-
   .nav-wrap { padding: 20px 0; }
   .btn-header { display: none; }
 
@@ -1064,10 +1075,10 @@ textarea { resize: vertical; }
     z-index: 999;
   }
   #nav.active { display: flex; }
-  .nav-link { font-size: 24px; color: var(--white); }
-  .nav-link::after { bottom: -6px; }
+  #nav .nav-link { font-size: 24px; color: var(--white); }
+  #nav .nav-link::after { bottom: -6px; }
 
-  #menuBtn { display: flex; z-index: 1000; position: relative; }
+  #menuBtn { display: flex; z-index: 1001; position: relative; }
 
   .hero-inner { grid-template-columns: 1fr; gap: 60px; }
   .hero-visual { height: 340px; }
