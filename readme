@@ -1,1 +1,48 @@
+# C.A.S
+
+C.A.S is a lightweight browser-based project built using **HTML, CSS, and JavaScript**.  
+It runs entirely on the client side and requires no backend or installation.
+
+## Live Demo
 https://s3h4nsa.github.io/c.a.s/
+
+## Features
+- Simple and clean interface
+- Built with pure HTML, CSS, and JavaScript
+- Fast and lightweight
+- Works on any modern browser
+
+## Project Structure
+
+```
+c.a.s/
+│
+├── index.html   # Main page
+├── style.css    # Styles and layout
+├── script.js    # JavaScript functionality
+└── README.md    # Project documentation
+```
+
+## How to Run
+
+### Option 1: Open directly
+1. Download or clone the repository
+2. Open the folder
+3. Double-click `index.html`
+
+### Option 2: Using Git
+
+```bash
+git clone https://github.com/s3h4nsa/c.a.s.git
+cd c.a.s
+```
+
+Then open `index.html` in your browser.
+
+## Technologies Used
+- HTML5
+- CSS3
+- JavaScript
+
+## License
+This project is open source and available under the MIT License.
