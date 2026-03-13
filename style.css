@@ -418,8 +418,8 @@ em { font-style: italic; color: var(--gold-2); }
   color: var(--white);
   white-space: nowrap;
 }
-.card-a { top: 180px; left: 0; animation: floatA 4s ease-in-out infinite; }
-.card-b { bottom: 140px; left: 0; animation: floatB 4s 1s ease-in-out infinite; }
+.card-a { top: 220px; left: 0; animation: floatA 4s ease-in-out infinite; }
+.card-b { bottom: 180px; left: 0; animation: floatB 4s 1s ease-in-out infinite; }
 
 @keyframes floatA { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
 @keyframes floatB { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
