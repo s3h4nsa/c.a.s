@@ -107,7 +107,9 @@ statNums.forEach(el => counterObserver.observe(el));
 const form = document.getElementById('contactForm');
 const msg  = document.getElementById('msg');
 // paste your Formspree URL here (replace YOUR_FORM_ID with your actual form ID):
-const FORMSPREE_URL = 'https://formspree.io/f/xqeyqern';
+// Endpoint is base64-encoded to keep it out of plain-text source inspection.
+// Encode your own URL with: btoa('https://formspree.io/f/YOUR_ID')
+const FORMSPREE_URL = atob('aHR0cHM6Ly9mb3Jtc3ByZWUuaW8vZi94cWV5cWVybg==');
 
 form.addEventListener('submit', async function(e) {
   e.preventDefault();
@@ -158,3 +160,22 @@ window.addEventListener('scroll', () => {
   if (orb1) orb1.style.transform = 'translateY(' + (scrollY * 0.15) + 'px)';
   if (orb2) orb2.style.transform = 'translateY(' + (scrollY * -0.1) + 'px)';
 }, { passive: true });
+/* ── Cookie Consent ── */
+(function () {
+  const banner = document.getElementById('cookieBanner');
+  if (!banner) return;
+  const stored = localStorage.getItem('cas_cookie_consent');
+  if (!stored) {
+    setTimeout(() => { banner.style.display = 'flex'; }, 1200);
+  }
+  document.getElementById('cookieAccept').addEventListener('click', () => {
+    localStorage.setItem('cas_cookie_consent', 'accepted');
+    banner.style.opacity = '0';
+    setTimeout(() => { banner.style.display = 'none'; }, 400);
+  });
+  document.getElementById('cookieDecline').addEventListener('click', () => {
+    localStorage.setItem('cas_cookie_consent', 'declined');
+    banner.style.opacity = '0';
+    setTimeout(() => { banner.style.display = 'none'; }, 400);
+  });
+})();
